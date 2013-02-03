@@ -11,15 +11,16 @@ struct node {
 };
 
 void print_ll(struct node *a) {
-	printf("Location of head: %p\n", a);
+//	printf("Location of head: %p\n", a);
 	//%p prints point data
 	while(a != NULL) {
 		//for pointers to structures, we use ->
 		printf("%d ",a->key);
+		a->key=3;
 		a=a->next;
 		printf("\n");
-		printf("Location of head: %p\n", a);
 	}
+
 }
 
 int length(struct node *a) {
@@ -50,10 +51,14 @@ int main() {
 		t->key=i;
 	}
 	t->next=NULL;
-	printf("Before printing ll: %d\n",head->key);
-	printf("Location of head: %p\n", head);
+	printf("Before printing ll: %p\n",head->next);
+//	printf("Location of head: %p\n", head);
 	print_ll(head);
 	printf("\n");
+	printf("After printing ll, the address of the pointer next: %p\n",head->next);
+	printf("it is the same as before\n");
+	printf("After printing ll, the address of the pointer next: %p\n",&head->next);
+	printf("it is different! This is because it's looking at the address of next.\n");
 	printf("After printing ll: %d\n",head->key);
 
 	len=length(head);	
