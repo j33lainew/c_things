@@ -1,0 +1,90 @@
+This is a test of some of the various ways of input in C. 
+
+
+The simplest way to get input is via scanf. Scanf is a wrapper of a bunch of lower level functions.
+To test how fast it is, a file was generated that contains 5 million numbers and we check whether 
+another number satisfies i % a == 0 for  i=1..5000000
+
+~~~~~ scanf_int ~~~~~~
+The first test is using scanf to read in the integer directly. 
+
+while(n>0) {
+	scanf("%d",&a);
+	if ( a % k ==0 && a >0 ) count++;
+	n--;
+}
+
+Running this code 10 times yields the following results:
+1.068750e+00	
+1.079440e+00	
+1.071180e+00	
+1.085148e+00	
+1.052309e+00	
+1.074509e+00	
+1.078817e+00	
+1.042791e+00	
+1.052947e+00	
+1.057467e+00	
+
+mean= 1.0633s, sd = 0.0141s
+
+
+~~~~~ scanf_string ~~~~~~
+The second test is using scanf to read in the input as a string and converting to int
+
+while(n>0) {
+  scanf("%s",string);
+  a=atoi(string);
+  if( a % k == 0 && a > 0) count++;
+  n--;
+}
+
+Running this code 10 times yields the following results:
+1.040806e+00	
+1.055699e+00	
+9.988280e-01	
+1.083639e+00	
+1.066579e+00	
+1.035441e+00	
+1.043754e+00	
+1.056591e+00	
+1.099071e+00	
+1.032930e+00	
+
+mean = 1.0513s, sd = 0.0281s
+
+~~~~~ gets ~~~~~~
+
+The third test is using gets to read in the input as a string and converting to int
+
+while(n>0) {
+		gets(string);	
+		a=atoi(string);
+		if( a % k == 0 && a > 0)  count++;
+		n--;
+}
+
+6.582640e-01	
+6.710560e-01
+6.807070e-01
+6.644800e-01
+6.682220e-01
+6.634790e-01
+6.820540e-01
+6.777060e-01
+6.984160e-01
+6.561670e-01
+
+mean = 0.6721s, sd = 0.0129s
+
+
+~~~~~ getchar ~~~~~~
+~~~~~ getchar_unlocked ~~~~~~
+~~~~~ gets ~~~~~~
+
+SOURCES:
+http://stackoverflow.com/questions/2507082/getc-vs-getchar-vs-scanf-for-reading-a-character-from-stdin
+https://github.com/italosiqueira/SPOJ/blob/master/450/faster.c
+http://bufferedbyteswriter.blogspot.ca/2013/03/fast-inputoutput-in-c.html
+http://programmerthing.blogspot.ca/2011/06/spoj-450-enormous-input-test.html
+

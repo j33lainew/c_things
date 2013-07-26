@@ -1,0 +1,30 @@
+C has the option to bit shift. So naturally, which is faster
+
+10*n vs.  n<<3 + n<<1?
+
+To test 1e8 numbers were multiplied by 10 both ways. 
+
+First the results with no optimisation done by the compile (-O0 flag)
+mul_test
+mean = 0.49802s, sd = 0.00281s
+shift_test
+mean = 0.53767s, sd = 0.00079s
+
+with normal compile options (no flags)
+mul_test
+mean = 0.49874s, sd =0.00237s 
+shift_test
+mean = 0.54071s, sd =0.00290s
+
+with agressive optimisation (-O3) 
+mul_test
+mean = 0.097505s, sd = 0.002902
+shift_test
+mean = 0.097150s, sd = 0.003558
+
+
+Conclusions: We can see that with no optimisation the regular old 10*n is slightly faster.
+With agressive optimisation they are pretty much equal. It is unsurprising that 10*n is fast
+because compiler writers would have implemented the bit-shifting multiplication behind the scenes.
+
+This type of tiny optimisation is unnecessary to do by hand 
